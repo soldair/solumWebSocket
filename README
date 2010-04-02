@@ -1,6 +1,6 @@
 Hey guys =) great to see you here!
 
-this is a php implementation of the websocket protocol. did some porting a while back from the google python version.
+this is a php implementation of the websocket protocol. i started a while back inspired by mod_websocket by google in python around the same time i wroite a server for flash sockets. right now this lib supports websocket protocol only but flash sockets is only a few releases away.
 
 ========how to start!==========
 1. download the latest chrome browser =) or any websocket capable
