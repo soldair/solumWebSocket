@@ -173,7 +173,7 @@ class response{
 		}
 	}
 
-	public static function all($response_to_all,$not_me = false){
+	public static function all($response_to_all){
 		global $clients;
 		if($response_to_all) {
 			if(DEBUG) {
@@ -181,9 +181,24 @@ class response{
 			}
 			
 			foreach(self::get_sockets() as $i => $s) {
-				//$not_me = ($not_me && $i != self::$current_socket_key);
+				
 				if($clients[$i] !== null) {
 					self::write($s,$response_to_all);
+				}
+			}
+		}
+	}
+
+	public static function all_but_me($response_to_all_but_me){
+		global $clients;
+		if($response_to_all_but_me) {
+			if(DEBUG) {
+				echo "[OUT] everyone but me message:\n$response_to_all\n\n";
+			}
+			
+			foreach(self::get_sockets() as $i => $s) {
+				if($clients[$i] !== null && $i != self::$current_socket_key) {
+					self::write($s,$response_to_all_but_me);
 				}
 			}
 		}
