@@ -39,7 +39,9 @@ do {
 		$err = socket_strerror(socket_last_error());
 		echo "[ERROR] socket_select() failed, reason: $err\n";
 		if($err == 'Success'){
-			/*
+			/**
+			NOTE having issues replicating now..
+
 			this bug happens when i connect to the app via browser and refresh. it seems to be environment based
 			it tight loops flooding the log with socket warnings
 
@@ -50,11 +52,14 @@ do {
 		}
 	} else if($r > 0) {
 
-
-		var_dump($read);
 		foreach($read as $sock => $s) {
-			
-			$s = $read[$sock];
+			/*
+			an undocumented feature in php 5.3 is that $sock is the key in the sockets array
+			in lesser versions the resulting read array is reindexed from 0
+			as this wont work across the board ill have to array search =(
+			*/
+			//$s = $read[$sock];
+			$sock = array_search($s,$sockets);
 
 			
 			if($s === $listen /*|| $s === $listen_policy*/) {
@@ -81,8 +86,6 @@ do {
 					module::dispatch_event('open',false,count($sockets)-1,array());
 				}
 			} else {
-
-				echo "sock check: $sock\n";
 
 				response::set_current_sock($sock,$s);
 

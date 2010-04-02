@@ -20,8 +20,9 @@ class chat_module extends default_module{
 
 	//do not implement unless you intend on using this event
 	//protected function event_loop(){
-		//use this to triggering additional responses at the end of every read loop
+		//use this to triggering additional responses optionally at the end of every read loop
 	//}
+
 	protected function event_open($data,$client){
 		$this->clients[$client] = array('name'=>$client);
 		//send back user id to client - cannot do this until web socket handshake is complete there should be another state call later for "open" to module interaction
