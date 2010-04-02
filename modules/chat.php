@@ -1,4 +1,4 @@
-<?
+<?php
 /*
 * copyright Ryan Day 2010
 * http://ryanday.org
