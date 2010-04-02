@@ -8,8 +8,8 @@ class server{
 	private static $config;
 	private static $initalized;
 
-	private static $clients = array();
-	private static $sockets = array();
+	public static $clients = array();
+	public static $sockets = array();
 
 	public static function init(&$sockets,&$clients){
 		if(self::$initalized){

@@ -5,6 +5,8 @@
 * dual licensed gpl and mit
 */
 
+
+//   http://www.whatwg.org/specs/web-socket-protocol/
 class web_socket_protocol{
 	public static function is_handshake($str){
 		return strpos($str,"GET / HTTP/1.1\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\n") === 0;
@@ -14,7 +16,7 @@ class web_socket_protocol{
 		$headers = parse_headers($handshake);
 		$ws_location = self::location_from_host($headers['Host']);
 
-		///TODO update handshake to comply with ne SEC-* websocket changes
+		///TODO update handshake to comply with new SEC-* websocket changes
 
 		return "HTTP/1.1 101 Web Socket Protocol Handshake\r\n"
 		."Upgrade: WebSocket\r\n"
@@ -93,12 +95,6 @@ class web_socket_protocol{
 		$loc = 'ws://';
 	
 		$url = parse_url($host);
-	
-		//echo "------------------\nCHECK URI!\n------------------\n";
-
-		//var_dump($url);
-
-		//echo "------------------\n------------------\n";
 	
 		$host = get($url,'host');
 		$port = get($url,'port');
