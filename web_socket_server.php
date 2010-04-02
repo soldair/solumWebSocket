@@ -1,9 +1,5 @@
-<?php
-/*
-* copyright Ryan Day 2010
-* http://ryanday.org
-* dual licensed gpl and mit
-*/
+<?
+
 error_reporting(E_ALL);
 
 define('SERVER_ROOT',dirname(__FILE__));
@@ -34,11 +30,24 @@ do {
 	$read = $sockets;
 	$write = null;
 	$except = null;
+
+
 	
 	$r = socket_select($read, $write, $except, null);
 	
 	if($r === false) {
-		echo "[ERROR] socket_select() failed, reason: " . socket_strerror(socket_last_error()) . "\n";
+		$err = socket_strerror(socket_last_error());
+		echo "[ERROR] socket_select() failed, reason: $err\n";
+		if($err == 'Success'){
+			/*
+			this bug happens when i connect to the app via browser and refresh. it seems to be environment based
+			it tight loops flooding the log with socket warnings
+
+			PHP 5.2.11 with Suhosin-Patch 0.9.7 (cli) (built: Sep 24 2009 12:40:58)
+			*/
+			exit('bad socket error that doesnt happen locally! socket count: '.count($sockets));
+			var_dump($read);
+		}
 	} else if($r > 0) {
 		
 		foreach($read as $sock => $s) {
@@ -189,7 +198,12 @@ class response{
 		if($GLOBALS['clients'][self::$current_socket_key] == 'websocket'){
 			$data = web_socket_protocol::frame_response($data);
 		}
-		socket_write($s, $data, strlen($data));
+
+		$bytes = @socket_write($s, $data, strlen($data));
+		if($bytes === false){
+			//client has disconnected
+			echo(count($GLOBALS['clients']));//[self::$current_socket_key]);
+		}
 	}
 
 	private static function get_sockets(){
