@@ -80,6 +80,8 @@ do {
 				}
 			} else {
 
+				echo "sock check: $sock\n";
+
 				response::set_current_sock($sock,$s);
 
 				//if the socket is not a websocket
@@ -96,6 +98,7 @@ do {
 
 							// close socket
 							socket_close($s);
+
 							unset($sockets[$sock]);
 							unset($clients[$sock]);
 							//array_splice($sockets, $sock, 1);
@@ -127,8 +130,11 @@ do {
 					// close socket
 					socket_close($s);
 
-					array_splice($sockets, $sock, 1);
-					array_splice($clients, $sock, 1);
+					unset($sockets[$sock]);
+					unset($clients[$sock]);
+
+					//array_splice($sockets, $sock, 1);
+					//array_splice($clients, $sock, 1);
 
 				} else if (!$clients[$sock] && web_socket_protocol::is_handshake($str)){
 

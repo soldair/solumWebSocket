@@ -14,6 +14,8 @@ class web_socket_protocol{
 		$headers = parse_headers($handshake);
 		$ws_location = self::location_from_host($headers['Host']);
 
+		///TODO update handshake to comply with ne SEC-* websocket changes
+
 		return "HTTP/1.1 101 Web Socket Protocol Handshake\r\n"
 		."Upgrade: WebSocket\r\n"
 		."Connection: Upgrade\r\n"
