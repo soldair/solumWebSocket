@@ -101,7 +101,7 @@ class module{
 	}
 
 	public static function add_client($class,$sock,$data = 1){
-		echo "i am really supposed to be adding the client with socket $sock and class $class";
+		echo "i am really supposed to be adding the client with socket $sock and class $class\n";
 		self::$module_data[$class]['clients'][$sock] = $data;
 	}
 

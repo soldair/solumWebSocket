@@ -45,11 +45,13 @@ do {
 
 			PHP 5.2.11 with Suhosin-Patch 0.9.7 (cli) (built: Sep 24 2009 12:40:58)
 			*/
-			exit('bad socket error that doesnt happen locally! socket count: '.count($sockets));
 			var_dump($read);
+			exit('bad socket error that doesnt happen locally! socket count: '.count($sockets));
 		}
 	} else if($r > 0) {
-		
+
+
+		var_dump($read);
 		foreach($read as $sock => $s) {
 			
 			$s = $read[$sock];
