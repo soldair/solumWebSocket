@@ -233,6 +233,11 @@
 			WebSocket testing
 		</h1>
 
+		<div>
+			<strong>solumWebSocket</strong>
+			<br/>git hub: <a href='http://github.com/soldair/solumWebSocket'>http://github.com/soldair/solumWebSocket</a>
+		</div>
+
 		<h2>Chat!</h2>
 		<div class="clearfix">
 			<div style="width:200px;border:2px inset #999;float:left;min-height:300px;">
@@ -260,6 +265,12 @@
 		*/?>
 		<div id='log' style="margin:5px;padding:5px;background-color:#000;color:#fff;font-weight:bold;">
 
+		</div>
+		<div style="margin:5px;border:2px inset #999;">
+			README!
+			<pre><?php
+				echo file_get_contents('README');
+			?></pre>
 		</div>
 	</body>
 </html>
