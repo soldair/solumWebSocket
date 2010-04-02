@@ -1,0 +1,41 @@
+Hey guys =) great to see you here!
+
+this is a php implementation of the websocket protocol. did some porting a while back from the google python version.
+
+========how to start!==========
+1. download the latest chrome browser =) or any websocket capable
+
+2. open a terminal
+
+3. copy config.php.bak to config.php
+	cp config.php.bak config.php
+
+4. make sure this code is web accessible in your browser
+	you should see the index which is a simple chat app at the time of this writing
+
+5. start the web socket server
+	php web_socket_server.php
+
+	It talks alot to stdout but you can send that to /dev/null
+	It stays connected to the shell too, i just havnt bother forking it yet. 
+	If you want to background it add & to the end of the command
+
+6. refresh the page in your browser.
+	a status message related to the connectedness of the web socket should be viewable at the bottom
+
+7. open more tabs/windows and chat with yourself
+
+===============================
+
+this server uses a loose modules architecture where on connection a module can choose if a client should be able to send messages.
+
+application logic goes in the modules directory.
+you can copy the default module to make your own.
+
+right now this is a single process implementation. if one message hangs everybody is out of luck.
+plans in the immediate future will be to fork processes as needed to create non blocking processing foreach message.
+
+this is very much a work in progress so bare with me. =)
+
+
+-- Ryan Day - 01 april 2010
